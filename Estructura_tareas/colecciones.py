@@ -10,24 +10,27 @@
 # 1 ENTENDER EL PROBLEMA 
 
     # 1 ENTRADA _ qué me dan 
-      # 
+      # frase (str)
 
     # 2 PROCESO _ qué hago con eso
-      # 
+      # contar las vocales 
 
     # 3 SALIDA _ qué debo mostrar 
-      # 
+      # la cantidad de vocales que se encontro 
 # ------------------------------------------------------------------------------------
 # 2 BOSQUEJO A MANO 
 
-  # 
-  # 
+  # frase = "hola como estas "
+  # vocales = {a,e,i,o,u} 
+  # pregunta = en la palabra frase se encuentra las siguientes vocales   
+  # contador = 6 vocales
+    
 # ------------------------------------------------------------------------------------
 # 3 DESCUBRIR EL PATRON 
 
-  # 
-  # 
-  # 
+  # convierte la cadena a minúsculas con .lower() y usa un set con las vocales 
+  # para preguntar rápido si el carácter es vocal.
+  
 # ------------------------------------------------------------------------------------
 #  4 ESCRIBIR EL CÓDIGO
 frase = input("Ingrese una frase: ").lower()
@@ -46,23 +49,26 @@ print(f"{contador} vocales")
 # 1 ENTENDER EL PROBLEMA 
 
     # 1 ENTRADA _ qué me dan 
-      # 
+      # notas(list)
 
     # 2 PROCESO _ qué hago con eso
-      # 
+      # buscar el maximo el minimo y el promedio 
 
     # 3 SALIDA _ qué debo mostrar 
-      # 
+      # resulatados de la lista Max; Min;Promedio
+
 # ------------------------------------------------------------------------------------
 # 2 BOSQUEJO A MANO 
 
-  # 
-  # 
+  # notas = [7, 8.5, 6, 9, 10, 5.5]
+  # max = 10
+  # min = 5.5
+  # promedio = ( 7 + 8.5 + 6 + 9 + 10 + 5.5 )/6 = 7.66
 # ------------------------------------------------------------------------------------
 # 3 DESCUBRIR EL PATRON 
 
   # 
-  # 
+  # sum(notas)/len(notas), max(notas), min(notas).
   # 
 # ------------------------------------------------------------------------------------
 #  4 ESCRIBIR EL CÓDIGO
@@ -95,24 +101,25 @@ print(f"Mínimo:   {min(notas):.2f}")
 # 1 ENTENDER EL PROBLEMA 
 
     # 1 ENTRADA _ qué me dan 
-      # 
+      # lista(list)
 
     # 2 PROCESO _ qué hago con eso
-      # 
+      # nueva_lista sin duplicados  y con el mismo orden 
 
     # 3 SALIDA _ qué debo mostrar 
-      # 
+      # retornar la nueva lista
 # ------------------------------------------------------------------------------------
 # 2 BOSQUEJO A MANO 
 
-  # 
-  # 
+  # lista = ["a", "b", "a", "c", "b", "d"]
+  # nueva_lista = ["a","b","c","d"]
+
 # ------------------------------------------------------------------------------------
 # 3 DESCUBRIR EL PATRON 
 
-  # 
-  # 
-  # 
+  #  recorre la lista original y ve armando la nueva; usa un set auxiliar de «ya vistos»
+  #  para chequear rápido.
+  
 # ------------------------------------------------------------------------------------
 #  4 ESCRIBIR EL CÓDIGO
 lista = ["a", "b", "a", "c", "b", "d"]
@@ -139,29 +146,37 @@ print(f"El resultado es : {nueva_lista}")
 # 1 ENTENDER EL PROBLEMA 
 
     # 1 ENTRADA _ qué me dan 
-      # 
+      # texto(str)
 
     # 2 PROCESO _ qué hago con eso
-      # 
+      # crear un diccionario con la frecuencia de palabras 
 
     # 3 SALIDA _ qué debo mostrar 
-      # 
+      # retornar un diccionario con la frecuancia de palabras
 # ------------------------------------------------------------------------------------
 # 2 BOSQUEJO A MANO 
 
-  # 
-  # 
+  # texto = "El perro y el gato y el perro"
+  # {'el': 3, 'perro': 2, 'y': 2, 'gato': 1}
+  # Más repetida: 'el' (3 veces)
+
 # ------------------------------------------------------------------------------------
 # 3 DESCUBRIR EL PATRON 
 
-  # 
-  # 
-  # 
+  #  texto.lower().split() para tokenizar. Usa dict.get(k, 0) + 1 para acumular. 
+  # Para la más frecuente: max(conteo, key=conteo.get).
+
 # ------------------------------------------------------------------------------------
 #  4 ESCRIBIR EL CÓDIGO
 texto = "El perro y el gato y el perro"
-letras = texto.lower().split()
-print(letras)
+conteo = {}
+for palabra in texto.lower().split():
+    conteo[palabra] = conteo.get(palabra, 0) + 1
+
+print(conteo)
+#"Busca en conteo la palabra que tenga el valor más grande y guárdala en mas."
+mas = max(conteo, key=conteo.get)  #  key le dice a max = Para comparar las palabras, mira el valor que tiene cada una."     get es lo que obtiene ese valor.
+print(f"Más repetida: '{mas}' ({conteo[mas]} veces)")
 # ------------------------------------------------------------------------------------
 
 
