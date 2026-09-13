@@ -265,3 +265,412 @@ for i in range (numero_Notas):
 
 print (f"Minimo : {minimo}")
 # -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 6 _ ¿Es primo?
+    # Leer un número y determinar si es primo (solo divisible entre 1 y él mismo).
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # n (entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # probar divisores de 2 hasta √n usando bandera
+
+    # 3 SALIDA _ qué debo mostrar 
+      # "n es primo" o "n no es primo"
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # n = 17, es_primo = True (bandera)
+
+  # Pruebo divisores del 2 al √17 ≈ 4:
+  # 17 % 2 = 1 (no divide)
+  # 17 % 3 = 2 (no divide)
+  # 17 % 4 = 1 (no divide)
+
+  # Ninguno dividió → 17 es primo ✓
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # Aquí usamos el patrón bandera: una variable booleana que empieza en
+  # True y cambia a False apenas se descarta.
+
+  # Optimización clave: solo hace falta probar hasta √n, no hasta n.
+  # Si n tiene un divisor mayor que √n, forzosamente tiene otro menor que ya habríamos
+  # encontrado.
+  # Un caso especial: 0 y 1 no son primos. Se descarta al inicio.
+  
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+numero = int(input("Ingrese un numero: "))
+
+primo = True
+
+if numero < 0:
+    print("El numero es negativo , vuelva a ingresar otro numero ")
+
+if numero < 2:
+    primo = False
+
+else:
+    i = 2
+
+    while i < numero and primo:
+        if numero % i == 0:
+            primo = False
+        else:
+            i = i + 1
+
+if primo:
+    print(f"El numero {numero} es primo")
+    
+elif numero >= 0:
+    print(f"El numero {numero} no es primo")
+# ------------------------------------------------------------------------------------
+# 🚀 Ahora tú
+# Genera una lista de todos los primos entre 2 y 100.
+def primos(num):
+
+    primo = True
+
+    if num < 2:
+        primo = False
+
+    else:
+        i = 2
+
+        while i < num and primo:
+            if num % i == 0:
+                primo = False
+            else:
+                i = i + 1
+
+    return primo
+
+numero = int(input("Ingrese un numero: "))  
+lista_primos= []
+lista_noprimos= []
+
+for i in range(2,numero) :
+    pri = primos(i)
+    
+    if pri :
+        lista_primos.append(i)
+    else :
+        lista_noprimos.append(i)
+
+print(f"Los primos {lista_primos}")
+print(f"Los no primos {lista_noprimos}")
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 7 _ Tabla de multiplicar
+  #  Lee un número N y muestra su tabla de multiplicar (del 1 al 12).
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # num(entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # multiplicar el num por cada numero del 1 al 12.
+
+    # 3 SALIDA _ qué debo mostrar 
+      # mostrar la multiplicación 
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # num = 7
+
+  # 7 X 1 = 7
+  # 7 X 2 = 14
+  # ...
+  # 7 X 12 = 84
+   
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # se debe guardar la multiplicacion en un acumulador que debe empezar en 1 
+  # vamos multiplicando desde el 1 al 12 de manera consecutiva , lo presnto 
+  # en cada iteraccion.
+
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+numero = int(input("Ingrese numero dela tabla que quiere presentar : "))
+mult = 1
+for i in range (1,12 + 1):
+  mult = numero * i
+  print(f"{numero} X {i} = {mult}")
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 8 _ Contar digitos de un numero 
+  # Lee un número y cuenta cuántos dígitos tiene (sin convertir a string).
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # num (entero )
+
+    # 2 PROCESO _ qué hago con eso
+      # necesito dividir el numero por 10, hasta que llegue a 0 y contar 
+
+    # 3 SALIDA _ qué debo mostrar 
+      # mostrar el resultado del contador 
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # num = 12345
+  # 5 dígitos
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # El patron consiste en dividir el num sobre 10 ,hasta que en 
+  # cieto momento me de cero , conel contador vamos contando.
+
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+n = int(input("Ingrese un número: "))
+
+n = abs(n)    # hace que n siempre sea positivo. abs() significa valor absoluto.
+
+contador = 0
+
+if n == 0:
+    contador = 1
+else:
+    while n > 0:
+        n = n // 10
+        contador += 1
+
+print(f"El número tiene  {contador}  dígitos")
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 9 _ Suma de pares e impares 
+  # Lee N números y muestra la suma de los pares y la suma de los impares por separado.
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # num(entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # identificar si un numero es par e impar y acumulador la suma de los
+      # pares e impares en una variable
+
+    # 3 SALIDA _ qué debo mostrar 
+      # presentar la suma acumulada de los numeros pares e impares.
+
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # num = 4
+  # par = 0
+  # impar = 0
+  # 4 % 2 = 0                  entonces es un numero par 
+  # par = par + 4 = 4          la variable par toma el 4 por verdadero 
+  # impar = 0                  por falso entra a acumularse en la variable impar 
+
+  # resulado = par 
+  # resulado = impar
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # El patron es que, los numeros ingresan y se verifica si el numero ingresado es par o impar 
+  # segun el resultado por verdadero o falso se ingresa a realizar una operacion que en este caso es la suma 
+  # el resultado se acumula en una variable. ese procesos se repite 
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+num = int(input("Ingrese un cantidad numeros: "))
+par = 0
+impar = 0
+
+for i in range(num +1 ):
+  numero = int(input("Ingrese el numero : "))
+
+  if numero % 2 == 0 :  par = par+numero
+  else : impar = impar + numero
+
+print(f"El resultado de la suma de los pares es {par}")
+print(f"El resultado de la suma de los impares es {impar}")
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 10 _ Validar entrada (bicle con centinela)
+  # Pide una edad y valida que esté entre 0 y 120. Si el usuario ingresa algo inválido, vuelve a pedirla.
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # edad (entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # validar que la edad este entre el rango de 0 a 120 
+
+    # 3 SALIDA _ qué debo mostrar 
+      # presentar la edad con un mensaje esta dentro del rango.
+
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # edad = 50
+  # validar = 0<edad<120      si es verdadero pasa la validacion 
+  # print ("La edad es valida")
+
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # El numero que ingreso debera ser validado segun el rango establecido y presentar un mensaje 
+  # de validacion , cada numero que ingrese  repetira este patron.
+
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+while True:
+    edad = int(input("Edad (0-120): "))
+    if 0 <= edad <= 120:
+        break                       # sale del while
+    print("Inválida, intenta de nuevo")
+
+print(f"Edad válida: {edad}")
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 11 _ Adivina el número
+  # Genera un número secreto entre 1 y 100. El usuario intenta adivinar. En cada intento le dices si es «mayor» o «menor». Cuenta cuántos intentos usó. 
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # numero(entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # generar un numero secreto el cual el usuario debe adivinar 
+      # indicarle si el numero que ingrese esta cerca al numero secreto 
+      # dandole pista como si es mayor o menor
+
+    # 3 SALIDA _ qué debo mostrar 
+      #El usuario averigua el numero presentandole un mensaje.
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # numero_secreto = 67
+  # intentos = 6
+  
+  # numero = 30          El suario ingresa ese valor 
+  # menor = 30 < 67      el numero ingresado es menor al numero secreto
+  # mayor = numero       el numero ingresado es mayor al numero secreto4
+
+  # intento = 6 - 1      aqui si el usuario se equivoca los intentos disminuyen 
+
+  # numero = 67          otro numero
+  # 67 = 67              como esto es verdadero 
+  # mensaje (Felicidades 🎉)
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # El usuario ingresa numeros hasta que adivine el numero secreto , el sistema 
+  # le da pistas para ver que tan serca esta de lograrlo.
+
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+numero_secreto = 65
+intentos = 6
+bandera = False
+
+for i in range(1,intentos +1):
+  numero = int(input("adivine el numero del 1 al 100 : "))
+  if numero == numero_secreto : 
+    bandera = True
+    break
+  else :
+    if numero < numero_secreto :
+      print("mayor") 
+    else :
+      print("menor")
+
+    intentos = intentos - 1
+    print(f"Quedan {intentos} intentos... \n")
+
+if bandera :
+  print(F"FELICIDADES 🎉 ")
+else :
+  print(f"A PERDIDO 😥 . El numero es {numero_secreto}")
+
+# ////////////////////////////
+
+import random
+
+secreto = random.randint(1, 100)
+intentos = 0
+
+while True:
+    intento = int(input("Adivina (1-100): "))
+    intentos += 1
+    if intento == secreto:
+        print(f"¡Correcto en {intentos} intentos!")
+        break
+    elif intento < secreto:
+        print("Es mayor")
+    else:
+        print("Es menor")
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Ejercicio 12 _ Serie de Fibonacci
+  # Muestra los primeros N números de Fibonacci. La serie: 0, 1, 1, 2, 3, 5, 8, 13, 21... Cada número es la suma de los dos anteriores.
+# ------------------------------------------------------------------------------------
+# 1 ENTENDER EL PROBLEMA 
+
+    # 1 ENTRADA _ qué me dan 
+      # numero(entero)
+
+    # 2 PROCESO _ qué hago con eso
+      # ingresamos los dos primeros numeros de la serie fibonacci, realizamos una suma  
+      #  de los dos anteriores para continuar la secuencia , asi sucesivamente .
+
+    # 3 SALIDA _ qué debo mostrar 
+      # Presentar la serie fibonacci
+
+# ------------------------------------------------------------------------------------
+# 2 BOSQUEJO A MANO 
+
+  # num = 8    hasto donde quiero mi serie 
+
+  # a = 0
+  # b = 1
+  # c= 0 + 1
+  # a = 1     ahora a va a tomar a (b) 
+  # c = 1     y b va a tomas a (c) asi sucesivamente....
+  # .
+  # .
+  # .
+
+  # print(Presento la lista de fibonacci)
+
+# ------------------------------------------------------------------------------------
+# 3 DESCUBRIR EL PATRON 
+
+  # La serie fibonacci consiste en que cada número es la suma de los dos anteriores, 
+  # aqui ya hay una secuencia en la que el siguiente numero es la suma de los dos anteriores.
+
+# ------------------------------------------------------------------------------------
+#  4 ESCRIBIR EL CÓDIGO
+numero = int(input("Ingrese el numero de fibonacci que desea : "))
+ 
+a,b = 0,1
+for _ in range(numero + 1):   # _ "No necesito guardar este valor. 
+  print(a,end=" ")            #  hace que deje un espacio y continúe en la misma línea.
+  a, b = b, a + b  
+  
+print()
+
+# //////////////////////
+
+n = int(input("¿Cuántos? "))
+
+a = 0
+b = 1
+
+for i in range(n):
+    print(a, end=" ")
+
+    c = a + b
+    a = b
+    b = c
+
+print()
+# -----------------------------------------------------------------------------------------------------------------------------------
+
+ 
