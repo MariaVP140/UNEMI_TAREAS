@@ -45,3 +45,48 @@ print(agrupar1.agrupar_por_categoria(5, 15, 30, 70))
 
 print(agrupar1.edad_promedio_categoria("adulto"))
 
+# Ejercicio de práctica 17 — Clasificador de temperaturas
+
+# Crea una clase ClasificadorTemperaturas que:
+
+# Tenga un método clasificar_temperatura(temperatura) que retorne "fria", "templada" o "caliente".
+# Tenga un método agrupar_temperaturas(*temperaturas) que guarde las temperaturas en un diccionario de listas según su categoría.
+# Tenga un método promedio_categoria(categoria) que calcule el promedio de las temperaturas almacenadas en esa categoría.
+
+class ClasificadorTemperaturas:
+    def __init__(self):
+        self.temperaturas = {
+            "fria": [],
+            "templada": [],
+            "caliente": []
+        }
+
+    def clasificar_temperatura(self, temperatura):
+        if temperatura < 18:
+            return "fria"
+        elif temperatura <= 28:
+            return "templada"
+        else:
+            return "caliente"
+
+    def agrupar_temperaturas(self, *temperaturas):
+        for temperatura in temperaturas:
+            categoria = self.clasificar_temperatura(temperatura)
+            self.temperaturas[categoria].append(temperatura)
+
+        return self.temperaturas
+
+    def promedio_categoria(self, categoria):
+        lista = self.temperaturas[categoria]
+
+        if len(lista) == 0:
+            return 0
+
+        return sum(lista) / len(lista)
+
+
+ct = ClasificadorTemperaturas()
+
+print(ct.agrupar_temperaturas(15, 20, 25, 30, 35))
+print(ct.promedio_categoria("templada"))
+

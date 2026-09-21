@@ -2,7 +2,7 @@
 # retorne la lista invertida sin usar reversed() (usa manual con bucles); (2) tenga método invertir_multiples(*listas) 
 # que reutilice el anterior para invertir varias listas y retorne un diccionario {lista_original: lista_invertida}.
 
-class InversorSecuencia():
+class InversorSecuencia:
     def __init__ (self):
         pass
 
@@ -18,15 +18,53 @@ class InversorSecuencia():
         for lis in listas :
             diccionario[tuple(lis)] = self.invertir_lista(lis)
 
-            return diccionario
+        return diccionario
         
 
 inversor1=InversorSecuencia()
 
 print(inversor1.invertir_lista([1,2,3]))
-resultado = inversor1.invertir_multiples([8,9,10],[5,6,7])
 print(inversor1.invertir_multiples([8,9,10],[5,6,7]))
 
-for original, invertida in resultado.items():
-    print("Original:", original)
-    print("Invertida:", invertida)
+# resultado = inversor1.invertir_multiples([8,9,10],[5,6,7])
+
+# print(inversor1.invertir_multiples([8,9,10],[5,6,7]))
+
+# for original, invertida in resultado.items():
+#     print("Original:", original)
+#     print("Invertida:", invertida)
+
+# Ejercicio de práctica: SeparadorNumeros
+
+# Crea una clase SeparadorNumeros que:
+
+# Tenga un método separar_pares(lista) que reciba una lista de números y retorne una nueva lista únicamente con los números pares. No uses filter(); hazlo manualmente con un bucle.
+# Tenga un método separar_multiples(*listas) que reciba varias listas, reutilice el método separar_pares() para cada una y retorne un diccionario con la lista original como clave y la lista de números pares como valor.
+# Crea un objeto de la clase y prueba ambos métodos con varias listas.
+
+class SeparadorNumeros:
+    def __init__(self):
+        pass
+
+    def separar_pares(self,lista):
+        lista_pares =[]
+        
+        for i in lista:
+            if i % 2 == 0:
+                lista_pares.append(i)
+
+        return lista_pares
+
+    def separar_multiples(self,*listas):
+        diccionario = {}
+        
+        for lista in listas:
+            diccionario[tuple(lista)] = self.separar_pares(lista)
+
+        return diccionario
+
+
+separador1=SeparadorNumeros()
+
+print(separador1.separar_pares([5,8,10]))
+print(separador1.separar_multiples([12,6,4],[16,3,9]))

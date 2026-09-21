@@ -323,7 +323,6 @@ else:
 
 if primo:
     print(f"El numero {numero} es primo")
-    
 elif numero >= 0:
     print(f"El numero {numero} no es primo")
 # ------------------------------------------------------------------------------------
@@ -332,7 +331,7 @@ elif numero >= 0:
 def primos(num):
 
     primo = True
-
+    
     if num < 2:
         primo = False
 

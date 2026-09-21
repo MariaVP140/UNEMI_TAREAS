@@ -38,3 +38,47 @@ inv.agregar_stock("pan", 50)
 print(inv.restar_stock("pan", 30))
 
 print(inv.productos_bajo_stock(25))
+
+# Ejercicio de práctica 19 — Control de materiales
+
+# Crea una clase ControlMateriales que:
+
+# Tenga un método agregar_material(material, cantidad) que almacene o aumente la cantidad en un diccionario.
+# Tenga un método usar_material(material, cantidad) que disminuya la cantidad solamente cuando exista suficiente.
+# Tenga un método materiales_escasos(limite) que retorne una lista con los materiales cuya cantidad sea menor al límite.
+
+class ControlMateriales:
+    def __init__(self):
+        self.materiales = {}
+
+    def agregar_material(self, material, cantidad):
+        if material in self.materiales:
+            self.materiales[material] += cantidad
+        else:
+            self.materiales[material] = cantidad
+
+    def usar_material(self, material, cantidad):
+        if material in self.materiales and self.materiales[material] >= cantidad:
+            self.materiales[material] -= cantidad
+            return True
+
+        return False
+
+    def materiales_escasos(self, limite):
+        escasos = []
+
+        for material, cantidad in self.materiales.items():
+            if cantidad < limite:
+                escasos.append(material)
+
+        return escasos
+
+
+cm = ControlMateriales()
+
+cm.agregar_material("papel", 100)
+cm.agregar_material("cartulina", 10)
+
+print(cm.usar_material("papel", 30))
+print(cm.usar_material("cartulina", 20))
+print(cm.materiales_escasos(20))

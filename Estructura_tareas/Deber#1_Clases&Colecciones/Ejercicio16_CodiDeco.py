@@ -29,3 +29,37 @@ codificador1 = CodificadorCesar()
 print(codificador1.codificar_palabra("Hola",3))
 print(codificador1.codificar_letra("l",2))
 print(codificador1.historial_codificaciones)
+
+# Ejercicio de práctica  — Transformador de letras
+
+# Crea una clase TransformadorTexto que:
+
+# Tenga un método desplazar_letra(letra, cantidad) que mueva una letra minúscula hacia adelante en el alfabeto utilizando %.
+# Tenga un método transformar_texto(texto, cantidad) que reutilice desplazar_letra() para transformar todo el texto.
+# Tenga un diccionario historial donde guarde el texto original como clave y el texto transformado como valor.
+
+class TransformadorTexto:
+    def __init__(self):
+        self.historial = {}
+
+    def desplazar_letra(self, letra, cantidad):
+        codigo = ord(letra)
+        nuevo_codigo = ((codigo - ord("a")) + cantidad) % 26
+        return chr(nuevo_codigo + ord("a"))
+
+    def transformar_texto(self, texto, cantidad):
+        resultado = ""
+
+        for letra in texto:
+            resultado += self.desplazar_letra(letra, cantidad)
+
+        self.historial[texto] = resultado
+
+        return resultado
+
+
+tt = TransformadorTexto()
+
+print(tt.desplazar_letra("b", 4))
+print(tt.transformar_texto("casa", 2))
+print(tt.historial)
