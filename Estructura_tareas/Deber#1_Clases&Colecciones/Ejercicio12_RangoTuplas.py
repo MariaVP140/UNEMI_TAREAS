@@ -8,7 +8,7 @@ class SelectorRango:
         pass
 
     def crear_rango(self,inicio,fin):
-        numeros = ()
+        numeros = ()     # esta bien nada mas que seria  mas correcto hacer primero una lista , agregar los numeros en esa lista luego crear una tuple
 
         for num in range(inicio,fin+1):
             numeros = numeros + (num,)
@@ -46,11 +46,8 @@ class AnalizadorNumeros:
         pass
 
     def registrar_grupo(self,*numeros):
-        grupos = []
-        for num in numeros:
-            grupos.append(num)
 
-        return tuple(grupos)
+        return numeros
 
     def combinar_grupos(self,*grupos):
         grup_sin_repetir = set()

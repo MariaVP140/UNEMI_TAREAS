@@ -39,8 +39,7 @@ if divisor1.es_perfecto(5) :
 
 print(divisor1.encontrar_multiples_divisores(5,6,3))
 
-# Ejercicio de práctica 15 — Números abundantes
-# Solución
+# Ejercicio de práctica — Números abundantes
 
 # Crea una clase AnalizadorDivisores que:
 
