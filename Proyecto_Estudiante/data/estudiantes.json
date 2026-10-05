@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana",
+    "apellido": "Perez",
+    "email": "ana@gmail.com",
+    "carnet": "EST2026001",
+    "notas": {
+      "Lengua": [
+        10.0
+      ],
+      "sociales": [
+        10.0
+      ]
+    },
+    "materias": [
+      "Lengua",
+      "sociales"
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "jose",
+    "apellido": "rodriguez",
+    "email": "jose@gmail.com",
+    "carnet": "EST01122",
+    "notas": {
+      "lengua": [
+        19.0
+      ],
+      "sociales": [
+        19.0
+      ]
+    },
+    "materias": [
+      "lengua",
+      "sociales"
+    ]
+  }
+]
