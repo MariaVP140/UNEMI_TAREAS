@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sociales",
+    "codigo": "SOC101",
+    "creditos": 9,
+    "cupos": 19
+  },
+  {
+    "id": 2,
+    "nombre": "Matematicas",
+    "codigo": "MAT102",
+    "creditos": 10,
+    "cupos": 5
+  }
+]

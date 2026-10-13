@@ -2,3 +2,9 @@
 !.gitignore
 !Estructura_tareas/
 !Estructura_tareas/**
+!Proyecto_Academico/
+!Proyecto_Academico/**
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
