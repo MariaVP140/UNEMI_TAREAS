@@ -1,4 +1,6 @@
+
 *
 !.gitignore
 !PROYECTOS_HyP/
 !PROYECTOS_HyP/**
+**/__pycache__/

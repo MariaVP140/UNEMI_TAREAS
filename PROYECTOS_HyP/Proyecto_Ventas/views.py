@@ -10,9 +10,12 @@ from shared.herramientas import es_email_valido
 # =====================================================================
 # Solo dice QUÉ métodos debe tener todo controlador.
 # CÓMO se hace cada uno lo escribe cada controlador, de la forma más simple.
-class CrudBase(ABC):
 
-    @abstractmethod
+# La idea es que CrudBase establezca qué operaciones debe tener un controlador,
+# mientras que las clases hijas definirán cómo realizarlas.
+class CrudBase(ABC): # ABC permite crear una clase base abstracta.
+
+    @abstractmethod # indica qué métodos deben implementar las clases hijas.
     def leer(self):
         pass
 
@@ -39,7 +42,9 @@ class CrudBase(ABC):
     @abstractmethod
     def eliminar(self, id_registro):
         pass
-
+# La clase CrudBase establece estos siete métodos, pero no contiene la lógica para ejecutarlos.
+# Esa tarea corresponde a los controladores concretos, 
+# como ClienteController, ProductoController y VentaController.
 
 # =====================================================================
 # CONTROLADOR DE CLIENTES
@@ -47,10 +52,10 @@ class CrudBase(ABC):
 class ClienteController(CrudBase):
 
     def __init__(self, archivo="data/clientes.json"):
-        self.gestor = GestorJSON(archivo)
+        self.gestor = GestorJSON(archivo)  
 
         # Leemos el JSON y convertimos cada diccionario en un objeto Cliente
-        self.lista = []
+        self.lista = [] # Crea una lista vacía donde se almacenarán los objetos Cliente.
         for datos in self.gestor.leer():
             self.lista.append(Cliente.desde_diccionario(datos))
 
@@ -73,7 +78,7 @@ class ClienteController(CrudBase):
             if not es_email_valido(email):
                 return f"Email inválido: '{email}'"
             # CONJUNTO con los emails de los OTROS clientes
-            usados = {c.email for c in self.lista if c.id != id_actual}
+            usados = {c.email for c in self.lista if c.id != id_actual}  # if c.id != id_actual excluye al cliente que se está actualizando, si corresponde.
             if email in usados:
                 return "Ese email ya está registrado"
 
@@ -97,7 +102,7 @@ class ClienteController(CrudBase):
         if texto == "":
             return encontrados
 
-        for cliente in self.lista:
+        for cliente in self.lista: # Esta condición comprueba si el texto aparece en alguno de los campos del cliente.
             if (texto in cliente.nombre.lower()
                     or texto in cliente.apellido.lower()
                     or texto in cliente.email
@@ -128,7 +133,7 @@ class ClienteController(CrudBase):
         self.guardar()
         return True, f"Cliente creado: {cliente.etiqueta()}"
 
-    def actualizar(self, id_cliente, datos):
+    def actualizar(self, id_cliente, datos):  # busca, comprueba, valida, modifica y guarda.
         cliente = self.obtener(id_cliente)
         if cliente is None:
             return False, f"No existe un cliente con id {id_cliente}"
@@ -152,8 +157,8 @@ class ClienteController(CrudBase):
                 valor = valor.title()
             elif campo == "email":
                 valor = valor.lower()
-            setattr(cliente, campo, valor)
-
+            setattr(cliente, campo, valor)#Esta línea modifica el atributo del objeto usando el nombre guardado en campo.
+# La ventaja de setattr() es que sirve para actualizar distintos atributos sin escribir una asignación diferente para cada uno.
         self.guardar()
         return True, f"Cliente {id_cliente} actualizado"
 
@@ -328,12 +333,14 @@ class VentaController(CrudBase):
 
         if cantidad <= 0:
             return "La cantidad debe ser mayor a 0"
+
         if self.clientes.obtener(cliente_id) is None:
             return f"No existe un cliente con id {cliente_id}"
 
         producto = self.productos.obtener(producto_id)
         if producto is None:
             return f"No existe un producto con id {producto_id}"
+
         if not producto.hay_stock(cantidad):
             return (f"Stock insuficiente de {producto.nombre}: "
                     f"hay {producto.stock}, piden {cantidad}")
@@ -379,6 +386,7 @@ class VentaController(CrudBase):
                       producto.id,
                       int(datos["cantidad"]),
                       producto.precio)          # foto del precio del momento
+# significa que la venta conserva ese precio aunque el producto tenga otro precio después.
 
         producto.descontar_stock(venta.cantidad)
         self.productos.guardar()                # guarda el stock nuevo en productos.json
@@ -438,3 +446,52 @@ class VentaController(CrudBase):
         for venta in self.lista:
             total += venta.calcular_total()
         return round(total, 2)
+
+# =====================================================================
+# PRUEBA BÁSICA
+# Este bloque SOLO se ejecuta si corres este archivo directamente:
+#     python views.py
+# Si main.py hace "from views import ClienteController", este bloque NO corre.
+# =====================================================================
+if __name__ == "_main_":
+    import shutil  # lo usamos al final para borrar la carpeta de prueba
+
+    # Usamos una carpeta APARTE para no tocar los datos reales de data/
+    CARPETA = "datos_prueba"
+
+    # 1) CrudBase es ABSTRACTA: solo es un "molde", no se puede instanciar.
+    try:
+        CrudBase()
+    except TypeError:
+        print("CrudBase no se puede instanciar (es abstracta)")
+
+    # 2) Creamos los tres controladores (se ejecuta su _init_).
+    #    VentaController recibe a los otros dos porque los NECESITA.
+    clientes = ClienteController(CARPETA + "/clientes.json")
+    productos = ProductoController(CARPETA + "/productos.json")
+    ventas = VentaController(clientes, productos, CARPETA + "/ventas.json")
+
+    # 3) crear() devuelve DOS valores: (True/False, mensaje)
+    ok, mensaje = clientes.crear({"nombre": "luis", "apellido": "mora",
+                                  "email": "luis@mail.com", "ciudad": "milagro"})
+    print(mensaje)                     # el nombre sale como "Luis Mora" por .title()
+
+    # Si un dato está mal, NO se crea y el mensaje explica por qué
+    ok, mensaje = clientes.crear({"nombre": "Ana", "apellido": "Pérez",
+                                  "email": "correo-malo"})
+    print(ok, "->", mensaje)           # False -> Email inválido
+
+    # 4) Producto: el id se pone solo con siguiente() (1, 2, 3...)
+    ok, mensaje = productos.crear({"nombre": "mouse", "precio": 20, "stock": 30})
+    print(mensaje)
+
+    # 5) Venta: se usan los ids del cliente (1) y del producto (1)
+    ok, mensaje = ventas.crear({"cliente_id": 1, "producto_id": 1, "cantidad": 2})
+    print(mensaje)                     # Venta 1 registrada por $40.00
+    print("Stock del mouse:", productos.obtener(1).stock)  # bajó de 30 a 28
+
+    # 6) El comprobante junta datos de los TRES controladores
+    print(ventas.comprobante(1))
+
+    # Limpieza: borramos la carpeta temporal con sus archivos JSON
+    shutil.rmtree(CARPETA)
