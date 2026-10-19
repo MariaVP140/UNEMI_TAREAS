@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Gorras",
+    "precio": 2.0,
+    "stock": 6
+  },
+  {
+    "id": 2,
+    "nombre": "Maletas",
+    "precio": 10.0,
+    "stock": 6
+  },
+  {
+    "id": 3,
+    "nombre": "Camisas",
+    "precio": 5.0,
+    "stock": 0
+  },
+  {
+    "id": 4,
+    "nombre": "Pantalones",
+    "precio": 5.0,
+    "stock": 5
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sol",
+    "apellido": "Ariza",
+    "email": "sa@gmail.com",
+    "telefono": "0997415566",
+    "ciudad": "Milagro"
+  },
+  {
+    "id": 2,
+    "nombre": "Jorge",
+    "apellido": "Venitez",
+    "email": "jv@gmail.com",
+    "telefono": "0987546213",
+    "ciudad": "Naranjito"
+  },
+  {
+    "id": 3,
+    "nombre": "Armando",
+    "apellido": "Lopez",
+    "email": "al@gmail.com",
+    "telefono": "",
+    "ciudad": "Guayaquil"
+  }
+]
